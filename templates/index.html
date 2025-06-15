@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voz a Texto Futurista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .title {
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(0, 242, 96, 0.7);
+            margin-bottom: 20px;
+        }
+        .mic-button {
+            background: linear-gradient(45deg, #00f260, #0575e6);
+            border: none;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(0, 242, 96, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .mic-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 242, 96, 0.8);
+        }
+        .transcription {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        .note {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">Voz a Texto Futurista</h1>
+    <p class="note">Haz clic en el micrófono para grabar. Usa Chrome o Edge para mejor compatibilidad.</p>
+    <button class="mic-button" onclick="startRecognition()">
+        <img src="/static/mc.png" style="width: 60px; height: 60px;" onerror="this.src='https://via.placeholder.com/60?text=Mic';">
+    </button>
+    <div id="transcription" class="transcription">Texto transcrito aparecerá aquí.</div>
+    <script>
+        function startRecognition() {
+            const transcription = document.getElementById('transcription');
+            if (!window.SpeechRecognition && !window.webkitSpeechRecognition) {
+                transcription.innerText = 'Error: Este navegador no soporta reconocimiento de voz.';
+                return;
+            }
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'es-ES';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onresult = (event) => {
+                transcription.innerText = event.results[0][0].transcript;
+            };
+
+            recognition.onerror = (event) => {
+                transcription.innerText = 'Error: ' + event.error;
+            };
+
+            recognition.onnomatch = () => {
+                transcription.innerText = 'No se detectó voz clara.';
+            };
+
+            recognition.start();
+            transcription.innerText = 'Escuchando...';
+        }
+    </script>
+</body>
+</html>
+
