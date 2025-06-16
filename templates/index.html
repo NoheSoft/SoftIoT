@@ -5,8 +5,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e0e0e0;
+            background: linear-gradient(135deg, #000000 0%, ##383838 100%);
+            color: #ffffff;
             font-family: 'Orbitron', sans-serif;
             display: flex;
             flex-direction: column;
@@ -18,11 +18,12 @@
         }
         .title {
             font-size: 2.5rem;
-            text-shadow: 0 0 10px rgba(0, 242, 96, 0.7);
+            text-shadow: 0 0 10px rgb(0, 162, 255); 
             margin-bottom: 20px;
+            line-height: 0.20;  /* Esto controla la altura de línea de ese texto en particular */
         }
         .mic-button {
-            background: linear-gradient(45deg, #00f260, #0575e6);
+            background: linear-gradient(45deg, #41dddd, #0191aa);
             border: none;
             border-radius: 50%;
             width: 100px;
@@ -30,16 +31,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 20px rgba(0, 242, 96, 0.5);
+            box-shadow: 0 0 20px rgb(139, 208, 248);
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
         }
         .mic-button:hover {
+            background: linear-gradient(45deg, #ff9797, #ff002b);
             transform: scale(1.1);
             box-shadow: 0 0 30px rgba(0, 242, 96, 0.8);
         }
         .transcription {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 174, 255, 0.096);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 20px;
@@ -51,13 +53,14 @@
         }
         .note {
             font-size: 0.9rem;
-            color: #b0b0b0;
+            color: #ffffff;
             margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <h1 class="title">Automatización de voz inteligente</h1>
+    <h2 class="title">voz inteligente</h2>
     <p class="note">Haz clic en el micrófono para grabar</p>
     <button class="mic-button" onclick="startRecognition()">
         <img src="/static/mc.png" style="width: 60px; height: 60px;" onerror="this.src='https://via.placeholder.com/60?text=Mic';">
